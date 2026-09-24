@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition & Hospitality Career Fair — Check-Off Sheet</title>
+<style>
+  :root{
+    --accent:#2f6f4e;
+    --accent-light:#e8f3ec;
+    --border:#d7d7d7;
+    --text:#222;
+  }
+  * { box-sizing: border-box; }
+  body{
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background:#f6f7f5;
+    color:var(--text);
+    margin:0;
+    padding:0 0 60px 0;
+  }
+  header{
+    background:var(--accent);
+    color:#fff;
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+  header h1{ margin:0 0 6px; font-size:1.6rem; }
+  header p{ margin:0; opacity:0.9; font-size:0.95rem; }
+
+  .container{
+    max-width:820px;
+    margin:24px auto;
+    padding:0 16px;
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:20px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .student-info{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .student-info label{
+    display:block;
+    font-weight:600;
+    margin-bottom:6px;
+    font-size:0.9rem;
+  }
+  .student-info input[type=text]{
+    width:100%;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:1rem;
+  }
+  .student-info > div{ flex:1; min-width:220px; }
+
+  h2.section-title{
+    font-size:1.1rem;
+    color:var(--accent);
+    border-bottom:2px solid var(--accent-light);
+    padding-bottom:8px;
+    margin-top:0;
+  }
+
+  ul.check-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.check-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:8px 6px;
+    border-radius:6px;
+    transition:background 0.15s;
+  }
+  ul.check-list li:hover{ background:var(--accent-light); }
+  ul.check-list input[type=checkbox]{
+    margin-top:3px;
+    width:18px;
+    height:18px;
+    accent-color:var(--accent);
+    flex-shrink:0;
+    cursor:pointer;
+  }
+  ul.check-list label{
+    cursor:pointer;
+    line-height:1.4;
+  }
+  li.checked label{
+    color:#555;
+    text-decoration: line-through;
+    text-decoration-color:#9bbfa8;
+  }
+
+  .progress-wrap{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    max-width:820px;
+    margin:0 auto;
+  }
+  .progress-bar-bg{
+    flex:1;
+    background:#eee;
+    border-radius:8px;
+    height:14px;
+    overflow:hidden;
+  }
+  .progress-bar-fill{
+    height:100%;
+    background:var(--accent);
+    width:0%;
+    transition:width 0.2s;
+  }
+  .progress-text{
+    font-size:0.9rem;
+    font-weight:600;
+    white-space:nowrap;
+    min-width:70px;
+    text-align:right;
+  }
+
+  .signature-line{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:10px;
+  }
+  .signature-line > div{ flex:1; min-width:200px; }
+  .signature-line label{
+    display:block;
+    font-size:0.85rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .signature-line input[type=text]{
+    width:100%;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:6px;
+  }
+
+  .actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:26px 0;
+  }
+  button{
+    font-size:1rem;
+    padding:12px 22px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-primary:hover{ background:#255c40; }
+  .btn-secondary{ background:#fff; color:var(--accent); border:2px solid var(--accent); }
+  .btn-secondary:hover{ background:var(--accent-light); }
+  .btn-reset{ background:#fff; color:#a33; border:2px solid #a33; }
+  .btn-reset:hover{ background:#fdeeee; }
+
+  footer{
+    text-align:center;
+    font-size:0.8rem;
+    color:#888;
+    margin-top:20px;
+  }
+
+  @media print{
+    .progress-wrap, .actions, footer{ display:none !important; }
+    body{ background:#fff; }
+    .card{ box-shadow:none; border:1px solid #999; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nutrition &amp; Hospitality Career Fair</h1>
+  <p>Final Project Requirements — Student Check-Off Sheet</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 0</div>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="student-info">
+      <div>
+        <label for="studentName">Student</label>
+        <input type="text" id="studentName" placeholder="Your full name">
+      </div>
+      <div>
+        <label for="careerName">Career</label>
+        <input type="text" id="careerName" placeholder="Career you selected">
+      </div>
+    </div>
+  </div>
+
+  <div id="checklistSections"></div>
+
+  <div class="card">
+    <h2 class="section-title">Student Confirmation</h2>
+    <p>I have reviewed this checklist and believe my career booth is ready for the Nutrition &amp; Hospitality Career Fair.</p>
+    <div class="signature-line">
+      <div>
+        <label for="sigName">Student signature (type full name)</label>
+        <input type="text" id="sigName" placeholder="Type your name as your signature">
+      </div>
+      <div>
+        <label for="sigDate">Date</label>
+        <input type="text" id="sigDate" placeholder="MM/DD/YYYY">
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" id="downloadBtn">⬇ Download Completed Checklist (for Canvas)</button>
+    <button class="btn-secondary" id="printBtn">🖨 Print / Save as PDF</button>
+    <button class="btn-reset" id="resetBtn">↺ Reset All</button>
+  </div>
+
+  <footer>Progress is automatically saved in your browser. Use the download button to submit a copy to Canvas.</footer>
+</div>
+
+<script>
+const sections = [
+  {
+    title: "1. Career Selection",
+    items: [
+      "I selected a career I am personally interested in, or my instructor assigned me a career.",
+      "My career is related to nutrition, food service, hospitality, or a related field.",
+      "I can explain why I selected this career."
+    ]
+  },
+  {
+    title: "2. Career Information",
+    items: [
+      "I can explain what the career is and what the professional does.",
+      "I included typical responsibilities, tasks, and/or work settings.",
+      "I included education, training, certifications, or other entry requirements.",
+      "I identified important technical, communication, leadership, or people skills.",
+      "I included possible work settings, career advancement, or related career opportunities.",
+      "I identified benefits, opportunities, or reasons someone might choose this career."
+    ]
+  },
+  {
+    title: "3. Career Booth / Display",
+    items: [
+      "My display is short, visual, organized, and easy to understand.",
+      "My display highlights the most important information about the career.",
+      "My display is designed so classmates can quickly understand the career.",
+      "My display is professional and ready to be viewed during the Career Fair."
+    ]
+  },
+  {
+    title: "4. Interactive Element",
+    items: [
+      "My booth includes at least one interactive element.",
+      "The activity encourages classmates to participate rather than simply read.",
+      "My interactive activity helps classmates learn something about the career.",
+      "I have tested or prepared my interactive element before Career Fair Day."
+    ]
+  },
+  {
+    title: "5. Research & Sources",
+    items: [
+      "I used at least 3 credible sources.",
+      "I used current information whenever possible.",
+      "I considered library databases and/or professional organizations as sources.",
+      "My sources are included on my display or accessible through a QR code.",
+      "I can explain where my information came from and why my sources are credible."
+    ]
+  },
+  {
+    title: "6. Career Fair Day",
+    items: [
+      "I am prepared to explain my career to classmates.",
+      "I am prepared to answer questions about my career.",
+      "I am prepared to invite classmates to participate in my interactive activity.",
+      "I am prepared to visit and participate in my classmates' career displays.",
+      "I am prepared to learn about career opportunities I may not have considered."
+    ]
+  },
+  {
+    title: "7. Final Check",
+    items: [
+      "My display is complete.",
+      "My interactive element is complete and ready to use.",
+      "My sources are included.",
+      "I have practiced explaining my career without simply reading from my display.",
+      "I am ready for Career Fair Day."
+    ]
+  },
+  {
+    title: "Connection to Course Learning Outcomes",
+    items: [
+      "A. Appraise careers in the nutrition and hospitality industry.",
+      "B. Design an educational and professional pathway for career development.",
+      "C. Differentiate between reliable and unreliable information sources.",
+      "D. Communicate career information effectively to others."
+    ]
+  }
+];
+
+const STORAGE_KEY = "careerFairChecklistState_v1";
+
+function renderSections(){
+  const container = document.getElementById("checklistSections");
+  container.innerHTML = "";
+  sections.forEach((sec, sIdx) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    const h2 = document.createElement("h2");
+    h2.className = "section-title";
+    h2.textContent = sec.title;
+    card.appendChild(h2);
+
+    const ul = document.createElement("ul");
+    ul.className = "check-list";
+    sec.items.forEach((item, iIdx) => {
+      const id = `chk_${sIdx}_${iIdx}`;
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <input type="checkbox" id="${id}" data-section="${sIdx}" data-item="${iIdx}">
+        <label for="${id}">${item}</label>
+      `;
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+    container.appendChild(card);
+  });
+}
+
+function getState(){
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+  const state = {
+    studentName: document.getElementById("studentName").value,
+    careerName: document.getElementById("careerName").value,
+    sigName: document.getElementById("sigName").value,
+    sigDate: document.getElementById("sigDate").value,
+    checks: {}
+  };
+  checkboxes.forEach(cb => { state.checks[cb.id] = cb.checked; });
+  return state;
+}
+
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(getState()));
+  updateProgress();
+}
+
+function loadState(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(!raw) return;
+  try{
+    const state = JSON.parse(raw);
+    document.getElementById("studentName").value = state.studentName || "";
+    document.getElementById("careerName").value = state.careerName || "";
+    document.getElementById("sigName").value = state.sigName || "";
+    document.getElementById("sigDate").value = state.sigDate || "";
+    Object.entries(state.checks || {}).forEach(([id, checked]) => {
+      const cb = document.getElementById(id);
+      if(cb){
+        cb.checked = checked;
+        cb.closest("li").classList.toggle("checked", checked);
+      }
+    });
+  }catch(e){ console.warn("Could not load saved state", e); }
+}
+
+function updateProgress(){
+  const boxes = document.querySelectorAll('input[type=checkbox]');
+  const total = boxes.length;
+  const checked = document.querySelectorAll('input[type=checkbox]:checked').length;
+  const pct = total ? Math.round((checked/total)*100) : 0;
+  document.getElementById("progressFill").style.width = pct + "%";
+  document.getElementById("progressText").textContent = `${checked} / ${total}`;
+}
+
+function attachListeners(){
+  document.getElementById("checklistSections").addEventListener("change", (e) => {
+    if(e.target.matches('input[type=checkbox]')){
+      e.target.closest("li").classList.toggle("checked", e.target.checked);
+      saveState();
+    }
+  });
+  ["studentName","careerName","sigName","sigDate"].forEach(id => {
+    document.getElementById(id).addEventListener("input", saveState);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    if(confirm("Reset the entire checklist? This will clear all checked items and typed info.")){
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById("studentName").value = "";
+      document.getElementById("careerName").value = "";
+      document.getElementById("sigName").value = "";
+      document.getElementById("sigDate").value = "";
+      document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.checked = false;
+        cb.closest("li").classList.remove("checked");
+      });
+      updateProgress();
+    }
+  });
+
+  document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+  document.getElementById("downloadBtn").addEventListener("click", downloadSummary);
+}
+
+function downloadSummary(){
+  const state = getState();
+  const now = new Date();
+  let lines = [];
+  lines.push("NUTRITION & HOSPITALITY CAREER FAIR — COMPLETED CHECK-OFF SHEET");
+  lines.push("=".repeat(65));
+  lines.push(`Student: ${state.studentName || "(not entered)"}`);
+  lines.push(`Career: ${state.careerName || "(not entered)"}`);
+  lines.push(`Downloaded: ${now.toLocaleString()}`);
+  lines.push("");
+
+  let totalChecked = 0, totalItems = 0;
+
+  sections.forEach((sec, sIdx) => {
+    lines.push(sec.title);
+    lines.push("-".repeat(sec.title.length));
+    sec.items.forEach((item, iIdx) => {
+      const id = `chk_${sIdx}_${iIdx}`;
+      const isChecked = !!state.checks[id];
+      totalItems++;
+      if(isChecked) totalChecked++;
+      lines.push(`[${isChecked ? "X" : " "}] ${item}`);
+    });
+    lines.push("");
+  });
+
+  lines.push(`Completion: ${totalChecked} / ${totalItems} items checked`);
+  lines.push("");
+  lines.push("STUDENT CONFIRMATION");
+  lines.push("---------------------");
+  lines.push("I have reviewed this checklist and believe my career booth is ready");
+  lines.push("for the Nutrition & Hospitality Career Fair.");
+  lines.push("");
+  lines.push(`Student signature: ${state.sigName || "________________________"}`);
+  lines.push(`Date: ${state.sigDate || "________________"}`);
+
+  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const safeName = (state.studentName || "student").replace(/[^a-z0-9]+/gi, "_");
+  a.href = url;
+  a.download = `CareerFair_Checklist_${safeName}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+renderSections();
+loadState();
+attachListeners();
+updateProgress();
+</script>
+
+</body>
+</html>
